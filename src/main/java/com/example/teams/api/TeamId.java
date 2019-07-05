@@ -13,24 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.users.api;
+package com.example.teams.api;
 
-public class UserInfo {
+@SuppressWarnings("WeakerAccess")
+public class TeamId {
 
     public final long id;
-    public final String name;
 
-    public UserInfo(long id, String name) {
+    public TeamId(long id) {
         this.id = id;
-        this.name = name;
     }
 
-    @SuppressWarnings("StringBufferReplaceableByString")
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TeamId)) return false;
+
+        TeamId teamId = (TeamId) o;
+
+        return id == teamId.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("UserInfo{");
+        final StringBuilder sb = new StringBuilder("TeamId{");
         sb.append("id=").append(id);
-        sb.append(", name='").append(name).append('\'');
         sb.append('}');
         return sb.toString();
     }

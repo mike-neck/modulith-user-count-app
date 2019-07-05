@@ -13,9 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.users.service;
+package com.example;
 
-import com.example.users.UserReadService;
+import java.util.Arrays;
 
-public interface UserService extends UserReadService, UserWriteService {
+public interface Validation<E> {
+
+    Result<E, Void> validate();
+
+    @SafeVarargs
+    static <E> Validation<E> all(Validation<E>... validations) {
+        return Arrays.stream(validations)
+                .reduce(() -> Result.right(null), (acc, vld) -> () -> {
+                    Result<E, Void> result = acc.validate();
+                    if (result.isRight()) {
+                        return vld.validate();
+                    }
+                    return result;
+                });
+    }
 }

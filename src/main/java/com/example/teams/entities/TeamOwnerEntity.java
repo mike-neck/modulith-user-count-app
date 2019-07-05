@@ -37,6 +37,14 @@ public class TeamOwnerEntity {
     public TeamOwnerEntity() {
     }
 
+    public TeamOwnerEntity(Long userId, Long teamId) {
+        this(new TeamOwnerEntityKey(userId, teamId));
+    }
+
+    private TeamOwnerEntity(TeamOwnerEntityKey id) {
+        this.id = id;
+    }
+
     public TeamOwnerEntity(TeamOwnerEntityKey id, TeamEntity team, UserEntity user) {
         this.id = id;
         this.team = team;

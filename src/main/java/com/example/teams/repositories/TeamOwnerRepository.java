@@ -18,6 +18,13 @@ package com.example.teams.repositories;
 import com.example.teams.entities.TeamOwnerEntity;
 import com.example.teams.entities.TeamOwnerEntityKey;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.Optional;
 
 public interface TeamOwnerRepository extends JpaRepository<TeamOwnerEntity, TeamOwnerEntityKey> {
+
+    @Query(name = "findByOwnerUserIdAndTeamName", value = "select to from TeamOwnerEntity to join TeamEntity t on to.team = t where t.name = :team_name and to.id.userId = :user_id")
+    Optional<TeamOwnerEntity> findByTeamNameAndOwnerUserId(@Param("user_id") Long ownerUserId, @Param("team_name") String name);
 }

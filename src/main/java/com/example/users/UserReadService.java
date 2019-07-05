@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.users.service;
+package com.example.users;
 
-import com.example.users.UserReadService;
+import java.util.Optional;
 
-public interface UserService extends UserReadService, UserWriteService {
+public interface UserReadService {
+    Optional<UserInfo> getUser(long userId);
 }

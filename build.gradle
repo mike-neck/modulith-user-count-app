@@ -26,7 +26,8 @@ dependencies  {
   testImplementation ('org.springframework.boot:spring-boot-starter-test') {
     exclude module: 'junit'
   }
-  testImplementation 'org.junit.jupiter:junit-jupiter'
+  testImplementation 'org.junit.jupiter:junit-jupiter-api'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
   testImplementation 'org.assertj:assertj-core'
   testImplementation 'de.olivergierke.moduliths:moduliths-test:1.0.0-SNAPSHOT'
 }

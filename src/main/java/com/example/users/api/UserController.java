@@ -16,6 +16,7 @@
 package com.example.users.api;
 
 import com.example.users.UserId;
+import com.example.users.UserInfo;
 import com.example.users.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,7 @@ public class UserController {
     @PostMapping(consumes = "application/json", produces = "application/json")
     ResponseEntity<UserId> create(@RequestBody UserCreateRequest request) {
         UserId userId = userService.createUser(request.getName());
-        logger.info("create-user, name: {}, new-user-id: {}", request.getName(), userId.userId);
+        logger.info("success: create-user, name: {}, new-user-id: {}", request.getName(), userId.userId);
         URI uri = UriComponentsBuilder.fromPath("/users/{userId}")
                 .buildAndExpand(userId.userId)
                 .toUri();

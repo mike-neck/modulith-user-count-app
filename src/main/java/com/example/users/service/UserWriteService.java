@@ -15,7 +15,8 @@
  */
 package com.example.users.service;
 
-import com.example.users.UserReadService;
+import com.example.users.UserId;
 
-public interface UserService extends UserReadService, UserWriteService {
+public interface UserWriteService {
+    UserId createUser(String name);
 }

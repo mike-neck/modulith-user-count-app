@@ -13,9 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.users.service;
+package com.example.users;
 
-import com.example.users.UserReadService;
+public class UserInfo {
 
-public interface UserService extends UserReadService, UserWriteService {
+    public final long id;
+    public final String name;
+
+    public UserInfo(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @SuppressWarnings("StringBufferReplaceableByString")
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("UserInfo{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
