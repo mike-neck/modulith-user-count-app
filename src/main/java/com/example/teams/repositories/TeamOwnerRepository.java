@@ -27,4 +27,7 @@ public interface TeamOwnerRepository extends JpaRepository<TeamOwnerEntity, Team
 
     @Query(name = "findByOwnerUserIdAndTeamName", value = "select to from TeamOwnerEntity to join TeamEntity t on to.team = t where t.name = :team_name and to.id.userId = :user_id")
     Optional<TeamOwnerEntity> findByTeamNameAndOwnerUserId(@Param("user_id") Long ownerUserId, @Param("team_name") String name);
+
+    @Query(name = "findByTeamID", value = "select teamOwner from TeamOwnerEntity teamOwner where teamOwner.id.teamId = :teamId")
+    Optional<TeamOwnerEntity> findByTeamId(@Param("teamId") long teamId);
 }

@@ -15,9 +15,10 @@
  */
 package com.example.teams.internal;
 
-import com.example.teams.api.TeamId;
+import com.example.teams.TeamId;
 import com.example.teams.entities.TeamEntity;
 import com.example.teams.entities.TeamOwnerEntity;
+import com.example.users.UserId;
 
 import java.time.Instant;
 
@@ -56,6 +57,18 @@ public class Team {
 
     public TeamId id() {
         return new TeamId(teamId);
+    }
+
+    public String name() {
+        return name;
+    }
+
+    public Instant createdAt() {
+        return createdAt;
+    }
+
+    public UserId ownerUserId() {
+        return new UserId(ownerUserId);
     }
 
     @SuppressWarnings("StringBufferReplaceableByString")

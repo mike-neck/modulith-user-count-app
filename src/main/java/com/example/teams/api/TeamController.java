@@ -18,20 +18,21 @@ package com.example.teams.api;
 import com.example.Result;
 import com.example.Utils;
 import com.example.Validation;
+import com.example.teams.TeamId;
 import com.example.teams.internal.Team;
 import com.example.teams.service.TeamService;
+import com.example.users.UserInfo;
 import com.example.users.UserReadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("teams")
@@ -80,5 +81,28 @@ public class TeamController {
     private Result<String, TeamId> sameTeamNotExisting(Long ownerUser, String teamName) {
         Result<String, Team> newTeam = teamService.createNewTeam(ownerUser, teamName);
         return newTeam.map(Team::id);
+    }
+
+    @GetMapping(path = "{teamId}", produces = "application/json")
+    ResponseEntity<?> get(@PathVariable("teamId") Long teamId) {
+        Optional<Team> team = teamService.findById(teamId);
+        Optional<OwnerUserJson> ownerUser = team
+                .map(Team::ownerUserId)
+                .flatMap(userService::getUser)
+                .map(user -> new OwnerUserJson(user.id, user.name));
+
+        ResponseEntity<?> responseEntity = ownerUser.flatMap(user -> team.map(t -> new TeamJson(t, user)))
+                .<ResponseEntity<?>>map(ResponseEntity::ok)
+                .orElseGet(() -> 
+                        ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.<String, Serializable>of(                                 
+                                "success", false, 
+                                "message", String.format("Team[%d] is not found.", teamId))));
+        if (responseEntity.getStatusCode().isError()) {
+            //noinspection unchecked,ConstantConditions
+            logger.info("failure: get-team, team-id: {}, message: {}", teamId, ((Map<String, Object>)responseEntity.getBody()).get("message"));
+        } else {
+            logger.info("success: get-team, team-id: {}", teamId);
+        }
+        return responseEntity;
     }
 }

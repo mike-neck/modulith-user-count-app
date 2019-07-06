@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Clock;
 import java.time.Instant;
+import java.util.Optional;
 
 @Service
 public class TeamService {
@@ -46,5 +47,9 @@ public class TeamService {
         Team team = Team.of(idGenerator.generateId(), name, Instant.now(clock), ownerUserId);
         Team result = teamStore.create(team);
         return Result.right(result);
+    }
+
+    public Optional<Team> findById(Long teamId) {
+        return teamStore.findById(teamId);
     }
 }

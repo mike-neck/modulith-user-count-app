@@ -22,6 +22,8 @@ import com.example.teams.repositories.TeamOwnerRepository;
 import com.example.teams.repositories.TeamRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class TeamStore {
 
@@ -41,5 +43,11 @@ public class TeamStore {
 
     public boolean ownerHasSameNamedTeam(Long ownerUserId, String teamName) {
         return ownerRepository.findByTeamNameAndOwnerUserId(ownerUserId, teamName).isPresent();
+    }
+
+    public Optional<Team> findById(Long teamId) {
+        Optional<TeamEntity> teamEntity = teamRepository.findById(teamId);
+        Optional<TeamOwnerEntity> ownerEntity = ownerRepository.findByTeamId(teamId);
+        return teamEntity.flatMap(team -> ownerEntity.map(owner -> Team.fromEntities(team, owner)));
     }
 }

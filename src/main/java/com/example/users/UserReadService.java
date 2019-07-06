@@ -18,5 +18,10 @@ package com.example.users;
 import java.util.Optional;
 
 public interface UserReadService {
+
     Optional<UserInfo> getUser(long userId);
+
+    default Optional<UserInfo> getUser(UserId userId) {
+        return getUser(userId.userId);
+    }
 }
