@@ -13,28 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.teams.entities;
+package com.example.email.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@SuppressWarnings("serialiVersionUID")
 @Embeddable
-public class TeamOwnerEntityKey implements Serializable {
+public class EmailAllocationKey implements Serializable {
 
-    @Column(name = "user_id", updatable = false, nullable = false)
+    @Column(name = "user_id", nullable = false, updatable = false, unique = true)
     private Long userId;
 
-    @Column(name = "team_id", updatable = false, nullable = false)
-    private Long teamId;
+    @Column(name = "email_id", nullable = false, unique = true)
+    private Long emailId;
 
-    public TeamOwnerEntityKey() {
+    public EmailAllocationKey(Long userId, Long emailId) {
+        this.userId = userId;
+        this.emailId = emailId;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public TeamOwnerEntityKey(Long userId, Long teamId) {
-        this.userId = userId;
-        this.teamId = teamId;
+    public EmailAllocationKey() {
     }
 
     public Long getUserId() {
@@ -45,39 +45,38 @@ public class TeamOwnerEntityKey implements Serializable {
         this.userId = userId;
     }
 
-    public Long getTeamId() {
-        return teamId;
+    public Long getEmailId() {
+        return emailId;
     }
 
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
+    public void setEmailId(Long emailId) {
+        this.emailId = emailId;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TeamOwnerEntityKey)) return false;
+        if (!(o instanceof EmailAllocationKey)) return false;
 
-        TeamOwnerEntityKey that = (TeamOwnerEntityKey) o;
+        EmailAllocationKey that = (EmailAllocationKey) o;
 
         if (!userId.equals(that.userId)) return false;
-        return teamId.equals(that.teamId);
-
+        return emailId.equals(that.emailId);
     }
 
     @Override
     public int hashCode() {
         int result = userId.hashCode();
-        result = 31 * result + teamId.hashCode();
+        result = 31 * result + emailId.hashCode();
         return result;
     }
 
     @SuppressWarnings("StringBufferReplaceableByString")
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("TeamOwnerEntityKey{");
+        final StringBuilder sb = new StringBuilder("EmailAllocationKey{");
         sb.append("userId=").append(userId);
-        sb.append(", teamId=").append(teamId);
+        sb.append(", emailId=").append(emailId);
         sb.append('}');
         return sb.toString();
     }

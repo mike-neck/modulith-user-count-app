@@ -13,14 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.users.service;
+package com.example.email.service;
 
+import com.example.email.Email;
 import com.example.users.UserId;
-import com.example.users.api.UserCreateRequest;
 
-public interface UserWriteService {
+import java.util.Optional;
 
-    UserId createUser(UserCreateRequest request);
+public interface EmailService {
 
-    UserId createUser(String name);
+    Optional<UserId> findUserIdByEmailAddress(Email email);
+
+    Optional<Long> allocateEmailToUser(String email, UserId userId);
 }

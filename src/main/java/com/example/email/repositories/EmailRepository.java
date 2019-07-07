@@ -13,14 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.users.service;
+package com.example.email.repositories;
 
-import com.example.users.UserId;
-import com.example.users.api.UserCreateRequest;
+import com.example.email.entities.EmailEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserWriteService {
-
-    UserId createUser(UserCreateRequest request);
-
-    UserId createUser(String name);
+public interface EmailRepository extends JpaRepository<EmailEntity, Long> {
 }

@@ -21,7 +21,6 @@ import com.example.Validation;
 import com.example.teams.TeamId;
 import com.example.teams.internal.Team;
 import com.example.teams.service.TeamService;
-import com.example.users.UserInfo;
 import com.example.users.UserReadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

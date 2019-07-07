@@ -15,7 +15,8 @@
  */
 package com.example.users.api;
 
-import com.example.users.UserId;
+import com.example.Utils;
+import com.example.Validation;
 import com.example.users.UserInfo;
 import com.example.users.service.UserService;
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -40,13 +41,18 @@ public class UserController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    ResponseEntity<UserId> create(@RequestBody UserCreateRequest request) {
-        UserId userId = userService.createUser(request.getName());
-        logger.info("success: create-user, name: {}, new-user-id: {}", request.getName(), userId.userId);
-        URI uri = UriComponentsBuilder.fromPath("/users/{userId}")
-                .buildAndExpand(userId.userId)
-                .toUri();
-        return ResponseEntity.created(uri).body(userId);
+    ResponseEntity<Map<String, Object>> create(@RequestBody UserCreateRequest request) {
+        Validation<String> validator = request.validator();
+        return validator
+                .validate()
+                .map(n -> userService.createUser(request))
+                .doOnRight(userId -> logger.info("success: create-user, name: {}, email: {}, new-user-id: {}", request.getName(), request.getEmail(), userId.userId))
+                .doOnLeft(message -> logger.info("failure: create-user, name: {}, email: {}, message: {}", request.getName(), request.getEmail(), message))
+                .map(userId -> UriComponentsBuilder.fromPath("/users/{userId}")
+                        .buildAndExpand(userId.userId)
+                        .toUri())
+                .map(uri -> ResponseEntity.created(uri).<Map<String, Object>>build())
+                .rescue(message -> ResponseEntity.badRequest().body(Map.of("success", false, "message", message)));
     }
 
     @GetMapping(value = "{userId}", produces = "application/json")

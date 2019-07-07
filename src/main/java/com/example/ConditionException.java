@@ -13,14 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.users.service;
+package com.example;
 
-import com.example.users.UserId;
-import com.example.users.api.UserCreateRequest;
+public class ConditionException extends RuntimeException {
 
-public interface UserWriteService {
-
-    UserId createUser(UserCreateRequest request);
-
-    UserId createUser(String name);
+    public ConditionException(String message) {
+        super(message);
+    }
 }

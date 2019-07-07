@@ -13,14 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.users.service;
+package com.example.email;
 
-import com.example.users.UserId;
-import com.example.users.api.UserCreateRequest;
+@SuppressWarnings("WeakerAccess")
+public class Email {
 
-public interface UserWriteService {
+    public final String email;
 
-    UserId createUser(UserCreateRequest request);
+    public Email(String email) {
+        this.email = email;
+    }
 
-    UserId createUser(String name);
+    @Override
+    public String toString() {
+        @SuppressWarnings("StringBufferReplaceableByString")
+        final StringBuilder sb = new StringBuilder("Email{");
+        sb.append("email='").append(email).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

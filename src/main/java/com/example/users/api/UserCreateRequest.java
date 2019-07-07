@@ -15,15 +15,21 @@
  */
 package com.example.users.api;
 
+import com.example.Utils;
+import com.example.Validation;
+
 public class UserCreateRequest {
 
     private String name;
 
+    private String email;
+
     public UserCreateRequest() {
     }
 
-    public UserCreateRequest(String name) {
+    public UserCreateRequest(String name, String email) {
         this.name = name;
+        this.email = email;
     }
 
     public String getName() {
@@ -34,10 +40,29 @@ public class UserCreateRequest {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    Validation<String> validator() {
+        Validation<String> nameIsRequired = Utils.notNull(name, "name is required");
+        Validation<String> emailIsRequired = Utils.notNull(email, "email is required");
+        Validation<String> nameCannotBeEmpty = Utils.notEmpty(name, "name cannot be empty");
+        Validation<String> emailCannotBeEmpty = Utils.notEmpty(email, "email cannot be empty");
+
+        return Validation.all(nameIsRequired, emailIsRequired, nameCannotBeEmpty, emailCannotBeEmpty);
+    }
+
+    @SuppressWarnings("StringBufferReplaceableByString")
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("UserCreateRequest{");
         sb.append("name='").append(name).append('\'');
+        sb.append(", email='").append(email).append('\'');
         sb.append('}');
         return sb.toString();
     }
