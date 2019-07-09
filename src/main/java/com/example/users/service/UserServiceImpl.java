@@ -20,7 +20,7 @@ import com.example.users.UserCreationEvent;
 import com.example.users.UserId;
 import com.example.users.UserInfo;
 import com.example.users.api.UserCreateRequest;
-import com.example.users.entities.UserEntity;
+import example.jpa.users.UserEntity;
 import com.example.users.repositories.UserRepository;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;

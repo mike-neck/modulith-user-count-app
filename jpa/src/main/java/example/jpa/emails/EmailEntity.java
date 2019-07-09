@@ -13,34 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.teams.entities;
+package example.jpa.emails;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.time.Instant;
+import javax.persistence.*;
 
-@Table(name = "teams")
 @Entity
-public class TeamEntity {
+@Table(name = "emails", uniqueConstraints = @UniqueConstraint(name = "unique_address", columnNames = "address"))
+public class EmailEntity {
 
     @Id
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "address", nullable = false, updatable = false, unique = true)
+    private String address;
 
-    @Column(name = "created_at")
-    private Instant createdAt;
-
-    public TeamEntity() {
+    public EmailEntity() {
     }
 
-    public TeamEntity(Long id, String name, Instant createdAt) {
+    public EmailEntity(Long id, String address) {
         this.id = id;
-        this.name = name;
-        this.createdAt = createdAt;
+        this.address = address;
     }
 
     public Long getId() {
@@ -51,29 +43,20 @@ public class TeamEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAddress() {
+        return address;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @SuppressWarnings("StringBufferReplaceableByString")
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("TeamEntity{");
+        final StringBuilder sb = new StringBuilder("EmailEntity{");
         sb.append("id=").append(id);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", createdAt=").append(createdAt);
+        sb.append(", address='").append(address).append('\'');
         sb.append('}');
         return sb.toString();
     }

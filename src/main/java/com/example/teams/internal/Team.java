@@ -16,8 +16,8 @@
 package com.example.teams.internal;
 
 import com.example.teams.TeamId;
-import com.example.teams.entities.TeamEntity;
-import com.example.teams.entities.TeamOwnerEntity;
+import example.jpa.teams.TeamEntity;
+import example.jpa.teams.TeamOwnerEntity;
 import com.example.users.UserId;
 
 import java.time.Instant;

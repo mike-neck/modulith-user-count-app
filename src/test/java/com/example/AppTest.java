@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.users.repositories;
+package com.example;
 
-import example.jpa.users.UserEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import de.olivergierke.moduliths.model.Modules;
+import org.junit.jupiter.api.Test;
 
-@Repository
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
+class AppTest {
+
+    @Test
+    void verifyModularity() {
+        Modules modules = Modules.of(App.class);
+        modules.verify();
+    }
 }

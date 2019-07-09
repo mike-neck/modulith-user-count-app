@@ -15,7 +15,7 @@
  */
 package com.example.teams.repositories;
 
-import com.example.teams.entities.TeamEntity;
+import example.jpa.teams.TeamEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TeamRepository extends JpaRepository<TeamEntity, Long> {

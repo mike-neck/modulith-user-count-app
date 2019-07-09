@@ -15,8 +15,8 @@
  */
 package com.example.teams.repositories;
 
-import com.example.teams.entities.TeamOwnerEntity;
-import com.example.teams.entities.TeamOwnerEntityKey;
+import example.jpa.teams.TeamOwnerEntity;
+import example.jpa.teams.TeamOwnerEntityKey;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

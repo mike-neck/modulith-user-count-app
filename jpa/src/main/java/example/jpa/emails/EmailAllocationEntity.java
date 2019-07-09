@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.email.entities;
+package example.jpa.emails;
 
-import com.example.users.entities.UserEntity;
+
+import example.jpa.users.UserEntity;
 
 import javax.persistence.*;
 

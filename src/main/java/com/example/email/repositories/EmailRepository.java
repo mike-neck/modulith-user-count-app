@@ -15,7 +15,7 @@
  */
 package com.example.email.repositories;
 
-import com.example.email.entities.EmailEntity;
+import example.jpa.emails.EmailEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EmailRepository extends JpaRepository<EmailEntity, Long> {

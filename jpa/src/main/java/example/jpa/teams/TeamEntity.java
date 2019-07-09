@@ -13,26 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.email.entities;
+package example.jpa.teams;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.Instant;
 
+@Table(name = "teams")
 @Entity
-@Table(name = "emails", uniqueConstraints = @UniqueConstraint(name = "unique_address", columnNames = "address"))
-public class EmailEntity {
+public class TeamEntity {
 
     @Id
     private Long id;
 
-    @Column(name = "address", nullable = false, updatable = false, unique = true)
-    private String address;
+    @Column(name = "name")
+    private String name;
 
-    public EmailEntity() {
+    @Column(name = "created_at")
+    private Instant createdAt;
+
+    public TeamEntity() {
     }
 
-    public EmailEntity(Long id, String address) {
+    public TeamEntity(Long id, String name, Instant createdAt) {
         this.id = id;
-        this.address = address;
+        this.name = name;
+        this.createdAt = createdAt;
     }
 
     public Long getId() {
@@ -43,20 +51,29 @@ public class EmailEntity {
         this.id = id;
     }
 
-    public String getAddress() {
-        return address;
+    public String getName() {
+        return name;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
     }
 
     @SuppressWarnings("StringBufferReplaceableByString")
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("EmailEntity{");
+        final StringBuilder sb = new StringBuilder("TeamEntity{");
         sb.append("id=").append(id);
-        sb.append(", address='").append(address).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", createdAt=").append(createdAt);
         sb.append('}');
         return sb.toString();
     }

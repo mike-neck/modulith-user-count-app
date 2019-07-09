@@ -15,8 +15,8 @@
  */
 package com.example.email.repositories;
 
-import com.example.email.entities.EmailAllocationEntity;
-import com.example.email.entities.EmailAllocationKey;
+import example.jpa.emails.EmailAllocationEntity;
+import example.jpa.emails.EmailAllocationKey;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

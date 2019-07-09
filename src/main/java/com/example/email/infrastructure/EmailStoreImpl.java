@@ -16,9 +16,9 @@
 package com.example.email.infrastructure;
 
 import com.example.email.Email;
-import com.example.email.entities.EmailAllocationEntity;
-import com.example.email.entities.EmailAllocationKey;
-import com.example.email.entities.EmailEntity;
+import example.jpa.emails.EmailAllocationEntity;
+import example.jpa.emails.EmailAllocationKey;
+import example.jpa.emails.EmailEntity;
 import com.example.email.repositories.EmailAllocationRepository;
 import com.example.email.repositories.EmailRepository;
 import com.example.users.UserId;

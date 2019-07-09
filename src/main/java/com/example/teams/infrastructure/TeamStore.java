@@ -15,8 +15,8 @@
  */
 package com.example.teams.infrastructure;
 
-import com.example.teams.entities.TeamEntity;
-import com.example.teams.entities.TeamOwnerEntity;
+import example.jpa.teams.TeamEntity;
+import example.jpa.teams.TeamOwnerEntity;
 import com.example.teams.internal.Team;
 import com.example.teams.repositories.TeamOwnerRepository;
 import com.example.teams.repositories.TeamRepository;
