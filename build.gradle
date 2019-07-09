@@ -17,18 +17,21 @@ repositories  {
 }
 
 dependencies  {
-  implementation project('jpa')
-  implementation  'org.springframework.boot:spring-boot-starter-data-jpa'
-  implementation  'org.springframework.boot:spring-boot-starter-web'
-
-  implementation 'de.olivergierke.moduliths:moduliths-core:1.0.0-SNAPSHOT'
+  implementation(
+      project('jpa')
+    , 'org.springframework.boot:spring-boot-starter-data-jpa'
+    , 'org.springframework.boot:spring-boot-starter-web'
+    ,'de.olivergierke.moduliths:moduliths-core:1.0.0-SNAPSHOT'
+  )
 
   runtimeOnly  'com.h2database:h2'
   testImplementation ('org.springframework.boot:spring-boot-starter-test') {
     exclude module: 'junit'
   }
-  testImplementation 'org.junit.jupiter:junit-jupiter-api'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-  testImplementation 'org.assertj:assertj-core'
-  testImplementation 'de.olivergierke.moduliths:moduliths-test:1.0.0-SNAPSHOT'
+  testImplementation(
+      'org.junit.jupiter:junit-jupiter-api'
+    , 'org.assertj:assertj-core'
+    , 'de.olivergierke.moduliths:moduliths-test:1.0.0-SNAPSHOT'
+  )
 }
