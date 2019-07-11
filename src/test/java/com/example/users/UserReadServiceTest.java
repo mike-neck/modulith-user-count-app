@@ -27,16 +27,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.Clock;
@@ -46,29 +40,23 @@ import java.time.ZoneOffset;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @ModuleTest
-@AutoConfigureDataJpa
-@AutoConfigureTestDatabase
-@AutoConfigureTestEntityManager
-@EnableAutoConfiguration
-@EnableJpaRepositories("com.example.users.repositories")
-@EntityScan("example.jpa.users")
-@Import({UserReadServiceTest.Config.class})
 class UserReadServiceTest {
 
     @Autowired
     UserReadService userReadService;
 
-    @Autowired
+    @MockBean
     UserRepository userRepository;
 
     @BeforeEach
     void setup() {
         Instant instant = OffsetDateTime.of(2019, 1, 2, 15, 4, 5, 6, ZoneOffset.UTC).toInstant();
-        userRepository.save(new UserEntity(1L, "test-user-1", instant));
-        userRepository.save(new UserEntity(2L, "test-user-2", instant));
+        UserEntity entity1 = new UserEntity(1L, "test-user-1", instant);
+        when(userRepository.findById(1L)).thenReturn(Optional.of(entity1));
     }
 
     @Test
