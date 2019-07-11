@@ -15,7 +15,7 @@
  */
 package com.example.email.service;
 
-import com.example.IdGenerator;
+import com.example.id.IdGenerator;
 import com.example.email.Email;
 import com.example.email.infrastructure.EmailStore;
 import com.example.users.UserId;

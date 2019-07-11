@@ -15,7 +15,7 @@
  */
 package com.example.teams.service;
 
-import com.example.IdGenerator;
+import com.example.id.IdGenerator;
 import com.example.Result;
 import com.example.teams.infrastructure.TeamStore;
 import com.example.teams.internal.Team;

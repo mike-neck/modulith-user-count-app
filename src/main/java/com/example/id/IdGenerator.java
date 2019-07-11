@@ -13,26 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example;
+package com.example.id;
 
-import org.springframework.stereotype.Component;
-
-import java.util.concurrent.atomic.AtomicLong;
-
-@Component
-public class IdGenerator {
-
-    private final AtomicLong id = new AtomicLong(1);
-
-    public long generateId() {
-        return id.incrementAndGet();
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("IdGenerator{");
-        sb.append("id=").append(id);
-        sb.append('}');
-        return sb.toString();
-    }
+public interface IdGenerator {
+    long generateId();
 }

@@ -15,7 +15,6 @@
  */
 package com.example.users.api;
 
-import com.example.Utils;
 import com.example.Validation;
 import com.example.users.UserInfo;
 import com.example.users.service.UserService;

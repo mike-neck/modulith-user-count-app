@@ -15,7 +15,7 @@
  */
 package com.example.users.service;
 
-import com.example.IdGenerator;
+import com.example.id.IdGenerator;
 import com.example.users.UserCreationEvent;
 import com.example.users.UserId;
 import com.example.users.UserInfo;
